@@ -15,3 +15,5 @@ Para essas análises você precisará instalar no seu computador:
 - matplotlib
 - wordcloud
 - os
+
+Você verá a descrição com detalhes nos códigos e a implementação nos notebooks do Jupyter. Fique a vontade para explorar as possibilidades!
