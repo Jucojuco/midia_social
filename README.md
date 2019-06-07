@@ -16,4 +16,4 @@ Para essas análises você precisará instalar no seu computador:
 - wordcloud
 - os
 
-Você verá a descrição com detalhes nos códigos e a implementação nos notebooks do Jupyter. Fique a vontade para explorar as possibilidades!
+Você verá a descrição com detalhes nos códigos e a implementação em python nos notebooks do Jupyter. Fique a vontade para explorar as possibilidades!
