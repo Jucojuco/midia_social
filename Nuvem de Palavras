@@ -1,0 +1,34 @@
+#Imports
+from nltk.corpus import PlaintextCorpusReader
+from matplotlib.colors import ListedColormap
+from nltk.corpus import stopwords
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+import pandas as pd
+from os import path
+import nltk
+import os
+
+#seleção do arquivo
+df = pd.read_excel('tweets_aqui.xlsx')
+
+#Separando palavras do arquivo em uma string
+l = ' '.join(df.text.values)
+lista = filter("https", l)
+
+#Stopwords são as palavras como artigo, preposição etc que aparecem com recorrencia que você não quer levar em consideração
+#Você também pode adicionar palavras específicas na string
+stops = stopwords.words('portuguese') + ['https']
+
+#Criando WordCloud
+mapa_cores = ListedColormap(['red']) #####cor das palavras, pode ser mais de uma
+wordcloud = WordCloud(background_color='white', #cor de fundo
+                     colormap=mapa_cores,
+                     stopwords=stops).generate(l)
+                     
+#plot
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+
+#salvar/exportar sua nuvem
+wordcloud.to_file("sua_cloud.png")
