@@ -1,0 +1,39 @@
+import tweepy
+import pandas as pd
+
+#suas credenciais Twitter aqui
+consumer_key = ************
+consumer_secret = ************
+access_token = ************
+access_token_secret = ***********
+
+#acessando com suas credenciais
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth,wait_on_rate_limit=True)
+
+#Caso não possua:
+#!pip3 install openpyxl
+#!python -m pip install --upgrade pip
+#from openpyxl import Workbook
+
+#Definindo string de Busca:
+# use "#Palavra" para buscar por palavras e #'s; use "@Palavra" para buscar um perfil; use " 'Pala vras' " para buscar espressões
+# é recomendado não utilizar mais de 10 chaves de busca
+# Sensível a letras maiúsculas e minúsculas
+data = []
+strings = "'mapa do acolhimento' OR 'Mapa do Acolhimento' OR 'Mapa do acolhimento' OR #MapadoAcolhimento OR #MAPADOACOLHIMENTO"
+
+#Laço de busca:
+#Defina máximo de tweets em count; a partir de qual data em "since" no formato do exemplo; adicione um filtro de idioma se preferir em "lang" 
+for tweet in tweepy.Cursor(api.search, q=strings, count=20000,
+                           since="2016-01-01", #).items():
+                           lang='pt').items():
+    data.append(tweet)
+    
+df_tweets = pd.DataFrame([q._json for q in data])
+df_tweets.to_pickle('tim.pkl')
+
+#Exportando dados:
+df_tweets.to_csv('tweets_aqui', sep = ';', decimal=',') #importante definir separador porque há "," nos textos coletados
+df_tweets.to_excel('tweets_aqui.xlsx')
